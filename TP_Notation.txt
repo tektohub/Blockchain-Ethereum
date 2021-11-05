@@ -1,0 +1,51 @@
+// SPDX-License-Identifier: GPL-3.0
+
+pragma solidity >=0.7.0 <0.9.0;
+
+contract Notation {
+    
+    struct eleve {
+        address eleveAdr;
+        uint noteBio; //note bio 
+        uint noteMath; //note bio 
+        uint noteFr; //note bio 
+       
+    }
+    
+    
+    address public profBio;
+    address public profMath;
+    address public profFr;
+    
+    address public directeur;
+    
+    
+    eleve[] public classe; // à voir .... 
+    
+    // mapping prof eleves 
+    mapping( address => eleve) public mapEleves;
+    
+    
+    function getAllNotes(address _eleve) public view returns (eleve memory) {
+        
+        //require() OR if ... 
+        if (msg.sender == directeur) {return mapEleves[_eleve]; }
+        //else { "permission denied "}
+        
+    }
+    
+    // function getNote(address _eleve, string _matiere) public view returns (uint) {
+    function getNote(address _eleve) public view returns (uint) {
+        
+        //require();
+        if (msg.sender == profBio ) {return mapEleves[_eleve].noteBio; }
+        
+        if (msg.sender == profMath ) {return mapEleves[_eleve].noteMath; }
+        if (msg.sender == profFr ) {return mapEleves[_eleve].noteFr; }
+        
+    }
+    
+    
+
+    
+}
